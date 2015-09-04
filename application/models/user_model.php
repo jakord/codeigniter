@@ -102,5 +102,44 @@ class User_model extends CI_Model{
         $this->db->where('login', $login);
         $this->db->update('users', $data);
     }
+
+    public function select_sity($value){
+        $this->db->select('citi,city_en');
+        $this->db->where('country_en',$value);
+        $query=$this->db->get('country');
+        if($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {return FALSE;}
+
+
+    }
+
+    public function upload_img($data,$login){
+        $this->db->where('login',$login);
+        $this->db->update('users', $data);
+
+    }
+
+    /*получает инофрмацию об аатрке пользоателмя*/
+    public function get_user_avatar(){
+        $this->db->select('img');
+        $this->db->where('login','artur123');
+        $query=$this->db->get('users');
+        if($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {return FALSE;}
+    }
+
+    /*добавляет страну и город*/
+    public function add_country_city($data,$login){
+        $this->db->where('login', $login);
+        $this->db->update('users', $data);
+    }
+
+    /*добаляет номер телефона*/
+    public function add_phone_number($login,$data){
+        $this->db->where('login', $login);
+        $this->db->update('users', $data);
+    }
 }
 
